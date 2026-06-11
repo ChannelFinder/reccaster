@@ -137,4 +137,3 @@ jobs:
         run: python .ci/cue.py -T 15M test
       - name: Collect and show test results
         run: python .ci/cue.py test-results
-
