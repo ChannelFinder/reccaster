@@ -1,0 +1,140 @@
+# .github/workflows/ci-scripts-build.yml for use with EPICS Base ci-scripts
+# (see: https://github.com/epics-base/ci-scripts)
+
+name: reccaster
+
+on:
+  push:
+    paths:
+      - '**'
+      - '.github/workflows/ci-scripts-build.yml'
+  pull_request:
+    paths:
+      - '**'
+      - '.github/workflows/ci-scripts-build.yml'
+
+env:
+  SETUP_PATH: .ci-local:.ci
+  EPICS_TEST_IMPRECISE_TIMING: YES
+
+jobs:
+  build-linux:
+    name: ${{ matrix.cmp }} / ${{ matrix.configuration }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    env:
+      CMP: ${{ matrix.cmp }}
+      BCFG: ${{ matrix.configuration }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, ubuntu-22.04]
+        cmp: [gcc, clang]
+        configuration: [default, static, debug, static-debug]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Prepare and compile dependencies
+        run: python .ci/cue.py prepare
+      - name: Build main module (example app)
+        run: python .ci/cue.py build
+      - name: Run main module tests
+        run: python .ci/cue.py -T 15M test
+      - name: Collect and show test results
+        run: python .ci/cue.py test-results
+
+  build-macos:
+    name: ${{ matrix.cmp }} / ${{ matrix.configuration }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    env:
+      CMP: ${{ matrix.cmp }}
+      BCFG: ${{ matrix.configuration }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-14, macos-13]
+        cmp: [clang]
+        configuration: [default, debug]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Prepare and compile dependencies
+        run: python .ci/cue.py prepare
+      - name: Build main module (example app)
+        run: python .ci/cue.py build
+      - name: Run main module tests
+        run: python .ci/cue.py -T 15M test
+      - name: Collect and show test results
+        run: python .ci/cue.py test-results
+
+  build-windows:
+    name: ${{ matrix.cmp }} / ${{ matrix.configuration }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    env:
+      CMP: ${{ matrix.cmp }}
+      BCFG: ${{ matrix.configuration }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2025]
+        cmp: [gcc, vs2022]
+        configuration: [default, static, debug, static-debug]
+        # TODO: Remove this exclusion once ci-scripts supports windows-2025-vs2026 with
+        # CMP=vs2022: https://github.com/epics-base/ci-scripts/issues/112
+        exclude:
+          - os: windows-2025
+            cmp: vs2022
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Prepare and compile dependencies
+        run: python .ci/cue.py prepare
+      - name: Build main module (example app)
+        run: python .ci/cue.py build
+      - name: Run main module tests
+        run: python .ci/cue.py -T 15M test
+      - name: Collect and show test results
+        run: python .ci/cue.py test-results
+
+  build-cross:
+    name: cross ${{ matrix.cross }} / ${{ matrix.cmp }} / ${{ matrix.configuration }}
+    runs-on: ubuntu-latest
+    env:
+      CMP: gcc
+      BCFG: default
+      CI_CROSS_TARGETS: ${{ matrix.cross }}
+      TEST: ${{ matrix.test }}
+      APT: re2c
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [default]
+        cross:
+          - linux-aarch64
+          - linux-arm@arm-linux-gnueabi
+          - linux-arm@arm-linux-gnueabihf
+          - linux-ppc
+          - linux-ppc64
+          - win32-x86-mingw
+          - windows-x64-mingw
+          - RTEMS-pc386-qemu@4.9
+          - RTEMS-pc386-qemu@4.10
+          - RTEMS-pc686-qemu@5
+        include:
+          - cross: RTEMS-pc386-qemu@4.10
+            test: NO
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Prepare and compile dependencies
+        run: python .ci/cue.py prepare
+      - name: Build main module (example app)
+        run: python .ci/cue.py build
+      - name: Run main module tests
+        run: python .ci/cue.py -T 15M test
+      - name: Collect and show test results
+        run: python .ci/cue.py test-results
+
