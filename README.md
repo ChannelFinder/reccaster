@@ -1,6 +1,6 @@
 # Reccaster
 
-Reccaster is an EPICS module to facilitate the communication between IOCs and [recceiver](../server). Before `iocInit`, reccaster will publish all records and their metadata to recceiver.
+Reccaster is an EPICS module to facilitate the communication between IOCs and [recceiver](https://github.com/ChannelFinder/recceiver). Before `iocInit`, reccaster will publish all records and their metadata to recceiver.
 
 ## IOC Shell Functions and Variables
 
