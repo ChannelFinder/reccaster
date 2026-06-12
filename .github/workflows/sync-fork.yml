@@ -23,7 +23,7 @@ jobs:
 
       - name: Sync tags
         run: |
-          git remote add fork https://x-access-token:${{ GH_TOKEN }}@github.com/shroffk/reccaster.git
+          git remote add fork https://x-access-token:${GH_TOKEN}@github.com/shroffk/reccaster.git
           git push fork --tags --force
         env:
           GH_TOKEN: ${{ secrets.SYNC_FORK_TOKEN }}
