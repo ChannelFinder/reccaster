@@ -5,13 +5,25 @@ on:
     branches:
       - master
       - sync-fork
+    tags:
+      - '*'
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Sync fork from parent
-        run: gh repo sync shroffk/reccaster -b master --force # replace with epics-base/reccaster
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync branch
+        run: gh repo sync shroffk/reccaster -b master --force # replace with epics-modules/reccaster
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_FORK_TOKEN }}
+
+      - name: Sync tags
+        run: |
+          git remote add fork https://x-access-token:${{ GH_TOKEN }}@github.com/shroffk/reccaster.git
+          git push fork --tags --force
         env:
           GH_TOKEN: ${{ secrets.SYNC_FORK_TOKEN }}
