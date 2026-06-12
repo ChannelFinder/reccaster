@@ -1,0 +1,17 @@
+name: Sync Fork
+
+on:
+  push:
+    branches:
+      - master
+      - sync-fork
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Sync fork from parent
+        run: gh repo sync shroffk/reccaster -b master --force # replace with epics-base/reccaster
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_FORK_TOKEN }}
