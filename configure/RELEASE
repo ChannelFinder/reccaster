@@ -30,8 +30,6 @@
 
 # These allow developers to override the RELEASE variable settings
 # without having to modify the configure/RELEASE file itself.
-# To keep the same depth of other EPICS modules, we have to add
-# the additional `/../`, because of `client` directory.
--include $(TOP)/../../RELEASE.local
--include $(TOP)/../../configure/RELEASE.local
+-include $(TOP)/../RELEASE.local
+-include $(TOP)/../configure/RELEASE.local
 -include $(TOP)/configure/RELEASE.local
