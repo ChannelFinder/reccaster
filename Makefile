@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 1997 Argonne National Laboratory
+# SPDX-FileCopyrightText: Michael Davidsaver and the reccaster contributors
+#
+# SPDX-License-Identifier: EPICS
+
 #Makefile at top of application tree
 TOP = .
 include $(TOP)/configure/CONFIG

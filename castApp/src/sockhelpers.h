@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: Michael Davidsaver and the reccaster contributors
+ *
+ * SPDX-License-Identifier: EPICS
+ */
+
 #ifndef SOCKHELPERS_H
 #define SOCKHELPERS_H
 /* blocking socket operations w/ timeouts and interruptions */

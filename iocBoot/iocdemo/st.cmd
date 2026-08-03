@@ -1,5 +1,10 @@
 #!../../bin/linux-x86_64-debug/demo
 
+#- SPDX-FileCopyrightText: 2003 Argonne National Laboratory
+#- SPDX-FileCopyrightText: Michael Davidsaver and the reccaster contributors
+#-
+#- SPDX-License-Identifier: EPICS
+
 ## You may have to change demo to something else
 ## everywhere it appears in this file
 

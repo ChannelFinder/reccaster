@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: Michael Davidsaver and the reccaster contributors
+ *
+ * SPDX-License-Identifier: EPICS
+ */
 
 #if defined(_WIN32) && !defined(_WIN32_WINNT)
 /* Windows API level default to Vista */
