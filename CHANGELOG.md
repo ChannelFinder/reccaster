@@ -24,6 +24,9 @@ and this project adheres to
 - Removed macos-13 from CI matrix, added macos-15-intel
 - Adopted Semantic Versioning for future releases
 
+### Removed
+- Unused `ioc-compose.yml` left over from the monorepo layout (`build: ../client`)
+
 ### Fixed
 - `RELEASE` include paths after the repository split
 
