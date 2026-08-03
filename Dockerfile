@@ -42,17 +42,17 @@ ARG EPICSVERSION=7.0.9
 RUN mv base-$EPICSVERSION base
 RUN cd base && make -j$(nproc)
 
-FROM build-epics AS recsync-base
+FROM build-epics AS reccaster-base
 
-WORKDIR /recsync
-COPY . /recsync/
-RUN mv docker/RELEASE.local configure/RELEASE.local
+WORKDIR /reccaster
+COPY . /reccaster/
 ENV EPICS_ROOT=/epics
 ENV EPICS_BASE=${EPICS_ROOT}/base
+RUN echo "EPICS_BASE=${EPICS_BASE}" > configure/RELEASE.local
 RUN make
 
-FROM recsync-base AS ioc-runner
+FROM reccaster-base AS ioc-runner
 
-WORKDIR /recsync/bin/${EPICS_HOST_ARCH}
+WORKDIR /reccaster/bin/${EPICS_HOST_ARCH}
 
-CMD ./demo /recsync/iocBoot/iocdemo/st.cmd
+CMD ./demo /reccaster/iocBoot/iocdemo/st.cmd
