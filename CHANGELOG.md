@@ -29,6 +29,7 @@ and this project adheres to
 
 ### Fixed
 - `RELEASE` include paths after the repository split
+- `CONFIG_SITE` include paths after the repository split
 
 ## [1.9.6] - 2026-05-29
 ### Changed
