@@ -47,8 +47,7 @@ WORKDIR /reccaster
 COPY . /reccaster/
 ENV EPICS_ROOT=/epics
 ENV EPICS_BASE=${EPICS_ROOT}/base
-RUN echo "EPICS_BASE=${EPICS_BASE}" > configure/RELEASE.local
-RUN make
+RUN echo "EPICS_BASE=${EPICS_BASE}" > configure/RELEASE.local && make
 
 FROM reccaster-base AS ioc-runner
 
