@@ -1,7 +1,7 @@
 # Download Epics
 FROM --platform=$BUILDPLATFORM debian:bookworm-slim AS epics-download-extract
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update && apt-get install -yq wget git
+RUN apt-get update && apt-get install --no-install-recommends -yq ca-certificates wget git
 WORKDIR /var/cache
 ARG EPICSVERSION=7.0.9
 RUN wget -q --show-progress "https://epics-controls.org/download/base/base-$EPICSVERSION.tar.gz" \
