@@ -22,9 +22,9 @@ STATIC_ASSERT(sizeof(casterHeader)==8);
 epicsShareDef double reccastTimeout = 20.0;
 epicsShareDef double reccastMaxHoldoff = 10.0;
 
-static void casterThread(void* junk)
+static void casterThread(void* arg)
 {
-    caster_t *self=junk;
+    caster_t *self=arg;
 
     casterMsg(self, "Starting");
 
