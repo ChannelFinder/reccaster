@@ -19,5 +19,5 @@ int main(int argc,char *argv[])
     }
     iocsh(NULL);
     epicsExit(0);
-    return(0);
+    return 0;
 }
