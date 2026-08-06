@@ -39,8 +39,7 @@ RUN apt-get update \
 WORKDIR /epics
 COPY --from=epics-download-extract /epics /epics
 ARG EPICSVERSION=7.0.9
-RUN mv "base-$EPICSVERSION" base
-RUN cd base && make -j$(nproc)
+RUN mv "base-$EPICSVERSION" base && make -C base -j"$(nproc)"
 
 FROM build-epics AS reccaster-base
 
