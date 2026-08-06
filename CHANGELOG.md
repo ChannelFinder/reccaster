@@ -23,6 +23,21 @@ implementations, and this repository cannot version it alone.
 > repository, in which some releases contain no reccaster changes.
 
 ## [Unreleased]
+
+## [2.0.0] - 2026-08-07
+
+First release carrying changes made since reccaster left the recsync repository,
+and the first under Semantic Versioning. The releases up to 1.9.6 describe source
+from the combined repository.
+
+The build paths inside the container image moved from `/recsync` to `/reccaster`,
+which breaks anything addressing files in the image by absolute path. A startup
+script loading `/recsync/dbd/demo.dbd` has to load `/reccaster/dbd/demo.dbd`
+instead, and the binaries are now under `/reccaster/bin/$EPICS_HOST_ARCH`. Nothing
+in the module itself changed incompatibly; sites building from source are
+unaffected. The major version reflects that rename alone. Moving the repository is
+not a versioned change.
+
 ### Added
 - LICENSE file
 
@@ -131,7 +146,8 @@ No recCaster changes were included in this combined recsync release. This tag is
 - `SKIPDEMO=YES` build option
 - Default `RELEASE` configuration
 
-[Unreleased]: https://github.com/ChannelFinder/reccaster/compare/1.9.6...HEAD
+[Unreleased]: https://github.com/ChannelFinder/reccaster/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/ChannelFinder/reccaster/compare/1.9.6...2.0.0
 [1.9.6]: https://github.com/ChannelFinder/reccaster/compare/1.9.5...1.9.6
 [1.9.5]: https://github.com/ChannelFinder/reccaster/compare/1.9.4...1.9.5
 [1.9.4]: https://github.com/ChannelFinder/reccaster/compare/1.9.3...1.9.4
