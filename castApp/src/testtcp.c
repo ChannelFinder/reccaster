@@ -67,7 +67,8 @@ static void testTCP(void)
     caster_t caster;
     SOCKET listener;
     shSocket sock;
-    osiSockAddr dest, client;
+    osiSockAddr dest;
+    osiSockAddr client;
     osiSocklen_t slen;
     epicsUInt16 msgid;
     union casterTCPBody buf;

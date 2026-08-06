@@ -44,7 +44,8 @@ static void haveCandidate(caster_t *self,
 int doCasterUDPPhase(caster_t *self)
 {
     shSocket sock; /* UDP listener */
-    osiSockAddr me, peer;
+    osiSockAddr me;
+    osiSockAddr peer;
     osiSocklen_t peerlen = sizeof(peer);
     int ret = -1;
 

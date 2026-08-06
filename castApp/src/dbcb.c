@@ -119,8 +119,8 @@ static int pushRecord(caster_t *caster, DBENTRY *pent)
     for(status=dbFirstInfo(pent); !ret && !status;
         status=dbNextInfo(pent))
     {
-        const char *name = dbGetInfoName(pent),
-                   *val  = dbGetInfoString(pent);
+        const char *name = dbGetInfoName(pent);
+        const char *val  = dbGetInfoString(pent);
 
         if(val && val[0]!='\0')
             ret = casterSendInfo(caster, rid, name, val);
@@ -139,7 +139,8 @@ int casterPushPDB(void *junk, caster_t *caster)
 {
     DBENTRY ent;
     int ret;
-    long rtstat, rstat;
+    long rtstat;
+    long rstat;
 
     ret = pushEnv(caster);
     if(ret)
