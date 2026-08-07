@@ -11,7 +11,8 @@ void* epicsRtemsFSImage;
 static void testUDP(void)
 {
     shSocket sock[2];
-    osiSockAddr addr0, addr1;
+    osiSockAddr addr0;
+    osiSockAddr addr1;
     osiSocklen_t alen;
     static const char testmsg[] = "Hello world";
     char buf[20];

@@ -32,8 +32,10 @@
 
 void shSocketInit(shSocket *s)
 {
-    s->sd = s->wakeup = INVALID_SOCKET;
-    s->timeout.tv_sec = s->timeout.tv_usec = 0;
+    s->sd = INVALID_SOCKET;
+    s->wakeup = INVALID_SOCKET;
+    s->timeout.tv_sec = 0;
+    s->timeout.tv_usec = 0;
 }
 
 void shSetTimeout(shSocket *s, double val)
@@ -193,7 +195,8 @@ int shSocketPair(SOCKET sd[2])
     int ret = socketpair(AF_UNIX, SOCK_STREAM, 0, sd);
 #endif
     if(ret) {
-        sd[0] = sd[1] = INVALID_SOCKET;
+        sd[0] = INVALID_SOCKET;
+        sd[1] = INVALID_SOCKET;
     }
     return ret;
 }

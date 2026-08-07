@@ -44,7 +44,8 @@ static void haveCandidate(caster_t *self,
 int doCasterUDPPhase(caster_t *self)
 {
     shSocket sock; /* UDP listener */
-    osiSockAddr me, peer;
+    osiSockAddr me;
+    osiSockAddr peer;
     osiSocklen_t peerlen = sizeof(peer);
     int ret = -1;
 
@@ -80,7 +81,7 @@ int doCasterUDPPhase(caster_t *self)
 
     while(!self->haveserv && !self->shutdown) {
         union casterUDP buf;
-        ssize_t ret;
+        ssize_t nrx;
 
         if(shWaitFor(&sock, SH_CANRX, MSG_NOTIMO)) {
             if(SOCKERRNO==SOCK_ETIMEDOUT)
@@ -88,14 +89,14 @@ int doCasterUDPPhase(caster_t *self)
             goto done;
         }
 
-        ret = recvfrom(sock.sd, buf.m_bytes, sizeof(buf.m_bytes), 0,
+        nrx = recvfrom(sock.sd, buf.m_bytes, sizeof(buf.m_bytes), 0,
                        &peer.sa, &peerlen);
-        if(ret<0) {
+        if(nrx<0) {
             if(SOCKERRNO==SOCK_EWOULDBLOCK)
                 continue;
             casterMsg(self, "recaster UDP recv error %d\n", (int)SOCKERRNO);
             goto done;
-        } else if(peerlen<sizeof(peer.ia) || ret<sizeof(buf.m_msg)) {
+        } else if(peerlen<sizeof(peer.ia) || nrx<sizeof(buf.m_msg)) {
             goto done;
         }
         haveCandidate(self, &buf.m_msg, &peer);

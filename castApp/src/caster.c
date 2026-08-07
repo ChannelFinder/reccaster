@@ -22,9 +22,9 @@ STATIC_ASSERT(sizeof(casterHeader)==8);
 epicsShareDef double reccastTimeout = 20.0;
 epicsShareDef double reccastMaxHoldoff = 10.0;
 
-static void casterThread(void* junk)
+static void casterThread(void* arg)
 {
-    caster_t *self=junk;
+    caster_t *self=arg;
 
     casterMsg(self, "Starting");
 
@@ -194,7 +194,8 @@ ssize_t casterSendRA(caster_t* self, epicsUInt8 type, size_t rid, const char* rt
 {
     union casterTCPBody buf;
     epicsUInt32 blen = sizeof(buf.c_add);
-    size_t lt=rtype ? strlen(rtype) : 0, ln=strlen(rname);
+    size_t lt=rtype ? strlen(rtype) : 0;
+    size_t ln=strlen(rname);
 
     buf.c_add.rid = htonl(rid);
     buf.c_add.rtype = type;
@@ -241,7 +242,8 @@ int casterSendInfo(caster_t *self, ssize_t rid, const char* name, const char* va
 {
     union casterTCPBody buf;
     epicsUInt32 blen = sizeof(buf.c_info);
-    size_t ln=strlen(name), lv=strlen(val);
+    size_t ln=strlen(name);
+    size_t lv=strlen(val);
 
     if(rid<0)
         return -1;
@@ -291,7 +293,9 @@ ssize_t casterRecvPMsg(shSocket* s, epicsUInt16* id,
                        void *buf, size_t len, int flags)
 {
     union casterTCPHead hbuf;
-    ssize_t ret, blen, rlen;
+    ssize_t ret;
+    ssize_t blen;
+    ssize_t rlen;
 
     ret = shRecvExact(s, &hbuf.m_bytes, sizeof(hbuf.m_bytes), flags);
     if(ret!=sizeof(hbuf.m_bytes))
