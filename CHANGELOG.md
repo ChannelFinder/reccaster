@@ -22,6 +22,13 @@ implementations, and this repository cannot version it alone.
 > repository, in which some releases contain no reccaster changes.
 
 ## [Unreleased]
+
+## [1.9.7] - 2026-08-14
+
+First release carrying changes made since reccaster left the recsync repository,
+and the first under Semantic Versioning. The releases up to 1.9.6 describe source
+from the combined repository.
+
 ### Added
 - LICENSE file
 
@@ -128,7 +135,8 @@ No recCaster changes were included in this combined recsync release. This tag is
 - `SKIPDEMO=YES` build option
 - Default `RELEASE` configuration
 
-[Unreleased]: https://github.com/ChannelFinder/reccaster/compare/1.9.6...HEAD
+[Unreleased]: https://github.com/ChannelFinder/reccaster/compare/1.9.7...HEAD
+[1.9.7]: https://github.com/ChannelFinder/reccaster/compare/1.9.6...1.9.7
 [1.9.6]: https://github.com/ChannelFinder/reccaster/compare/1.9.5...1.9.6
 [1.9.5]: https://github.com/ChannelFinder/reccaster/compare/1.9.4...1.9.5
 [1.9.4]: https://github.com/ChannelFinder/reccaster/compare/1.9.3...1.9.4
