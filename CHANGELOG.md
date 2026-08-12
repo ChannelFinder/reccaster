@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+The versioned surface is the module. It covers the databases in `db/`,
+`reccaster.dbd` and the iocsh functions it registers, the library soname, and any
+headers the module installs. A backwards incompatible change to any of these is a
+major release. The wire protocol is left out: it is shared with other
+implementations, and this repository cannot version it alone.
+
 > The reccaster client previously lived in the `client/` directory of the
 > [recsync](https://github.com/ChannelFinder/recsync) repository, where
 > releases 1.0 through 1.9.6 were tagged. See
