@@ -23,13 +23,11 @@ and this project adheres to
 - Split reccaster into a standalone repository, separate from recsync (GitHub workflows, `.gitmodules`, pre-commit config, Docker-based CI)
 - Removed macos-13 from CI matrix, added macos-15-intel
 - Adopted Semantic Versioning for future releases
-- Docker image build paths renamed from `/recsync` to `/reccaster`
-- Docker build writes `configure/RELEASE.local` at image build time instead of
-  committing `docker/RELEASE.local`
 
 ### Removed
 - Unused `ioc-compose.yml` left over from the monorepo layout (`build: ../client`)
 - Committed `docker/RELEASE.local` (container-only `EPICS_BASE` path)
+- `Dockerfile`, `.dockerignore`, and `.github/workflows/docker.yml` (image published to `ghcr.io/channelfinder/reccaster`)
 
 ### Fixed
 - `RELEASE` include paths after the repository split
