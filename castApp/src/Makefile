@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2003 Argonne National Laboratory
+# SPDX-FileCopyrightText: Michael Davidsaver and the reccaster contributors
+#
+# SPDX-License-Identifier: EPICS
+
 TOP=../..
 
 include $(TOP)/configure/CONFIG
