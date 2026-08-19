@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+The versioned surface is the module. It covers the databases in `db/`,
+`reccaster.dbd` and the iocsh functions it registers, the library soname, and any
+headers the module installs. A backwards incompatible change to any of these is a
+major release. The wire protocol is left out: it is shared with other
+implementations, and this repository cannot version it alone.
+
 > The reccaster client previously lived in the `client/` directory of the
 > [recsync](https://github.com/ChannelFinder/recsync) repository, where
 > releases 1.0 through 1.9.6 were tagged. See
@@ -16,6 +22,13 @@ and this project adheres to
 > repository, in which some releases contain no reccaster changes.
 
 ## [Unreleased]
+
+## [1.9.7] - 2026-08-14
+
+First release carrying changes made since reccaster left the recsync repository,
+and the first under Semantic Versioning. The releases up to 1.9.6 describe source
+from the combined repository.
+
 ### Added
 - LICENSE file
 
@@ -23,13 +36,11 @@ and this project adheres to
 - Split reccaster into a standalone repository, separate from recsync (GitHub workflows, `.gitmodules`, pre-commit config, Docker-based CI)
 - Removed macos-13 from CI matrix, added macos-15-intel
 - Adopted Semantic Versioning for future releases
-- Docker image build paths renamed from `/recsync` to `/reccaster`
-- Docker build writes `configure/RELEASE.local` at image build time instead of
-  committing `docker/RELEASE.local`
 
 ### Removed
 - Unused `ioc-compose.yml` left over from the monorepo layout (`build: ../client`)
 - Committed `docker/RELEASE.local` (container-only `EPICS_BASE` path)
+- `Dockerfile`, `.dockerignore`, and `.github/workflows/docker.yml` (image published to `ghcr.io/channelfinder/reccaster`)
 
 ### Fixed
 - `RELEASE` include paths after the repository split
@@ -124,7 +135,8 @@ No recCaster changes were included in this combined recsync release. This tag is
 - `SKIPDEMO=YES` build option
 - Default `RELEASE` configuration
 
-[Unreleased]: https://github.com/ChannelFinder/reccaster/compare/1.9.6...HEAD
+[Unreleased]: https://github.com/ChannelFinder/reccaster/compare/1.9.7...HEAD
+[1.9.7]: https://github.com/ChannelFinder/reccaster/compare/1.9.6...1.9.7
 [1.9.6]: https://github.com/ChannelFinder/reccaster/compare/1.9.5...1.9.6
 [1.9.5]: https://github.com/ChannelFinder/reccaster/compare/1.9.4...1.9.5
 [1.9.4]: https://github.com/ChannelFinder/reccaster/compare/1.9.3...1.9.4
