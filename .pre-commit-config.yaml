@@ -6,3 +6,15 @@ repos:
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-merge-conflict
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v6.2.0
+    hooks:
+      - id: reuse-lint-file
+        files: |
+          (?x)^(
+            (castApp|demoApp)/src/.*\.(c|h|cpp|dbd)
+            |(castApp|demoApp)/Db/.*\.db
+            |(.*/)?Makefile
+            |configure/(CONFIG|CONFIG_SITE|RELEASE|RULES|RULES_DIRS|RULES_TOP|RULES\.ioc)
+            |iocBoot/.*/st\.cmd
+          )$
