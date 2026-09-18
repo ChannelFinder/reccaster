@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: The reccaster contributors
+ *
+ * SPDX-License-Identifier: EPICS
+ */
+
 #ifndef CASTER_H
 #define CASTER_H
 
