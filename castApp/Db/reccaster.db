@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: The reccaster contributors
+#
+# SPDX-License-Identifier: EPICS
+
 record(mbbi, "$(P)State-Sts") {
   field(DTYP, "RecCaster")
   field(PINI, "RUNNING")

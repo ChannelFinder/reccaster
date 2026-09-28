@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: The reccaster contributors
+ *
+ * SPDX-License-Identifier: EPICS
+ */
 
 #include <epicsVersion.h>
 #include <epicsString.h>

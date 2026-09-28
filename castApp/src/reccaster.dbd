@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: The reccaster contributors
+#
+# SPDX-License-Identifier: EPICS
+
 registrar(reccasterRegistrar)
 variable(reccastTimeout,double)
 variable(reccastMaxHoldoff,double)
